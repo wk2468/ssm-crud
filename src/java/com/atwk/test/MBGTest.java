@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * mybatis逆向工程
  * Created by wk on 2019/3/31.
  */
 public class MBGTest {

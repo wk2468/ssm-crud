@@ -8,6 +8,18 @@
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="d_id" jdbcType="INTEGER" property="dId" />
   </resultMap>
+  <!--带了部门信息的resultMap-->
+  <resultMap id="WithDeptResultMap" type="com.atwk.bean.Employee">
+    <id column="emp_id" jdbcType="INTEGER" property="empId" />
+    <result column="emp_name" jdbcType="VARCHAR" property="empName" />
+    <result column="gender" jdbcType="CHAR" property="gender" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="d_id" jdbcType="INTEGER" property="dId" />
+    <association property="department" javaType="com.atwk.bean.Department">
+      <id column="dept_id" jdbcType="INTEGER" property="deptId" />
+      <result column="dept_name" jdbcType="VARCHAR" property="deptName"/>
+    </association>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -69,6 +81,10 @@
   <sql id="Base_Column_List">
     emp_id, emp_name, gender, email, d_id
   </sql>
+  <!--带了部门信息的查询信息-->
+  <sql id="WithDept_Column_List">
+    e.emp_id, e.emp_name, e.gender, e.email, e.d_id,d.dept_id, d.dept_name
+  </sql>
   <select id="selectByExample" parameterType="com.atwk.bean.EmployeeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -83,10 +99,32 @@
       order by ${orderByClause}
     </if>
   </select>
+  <!--按条件查询员工信息（带部门信息）-->
+  <select id="selectByExampleWithDept" parameterType="com.atwk.bean.EmployeeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="WithDept_Column_List" />
+      from tbl_emp e LEFT JOIN tbl_dept d ON e.d_id = d.dept_id
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tbl_emp
+    where emp_id = #{empId,jdbcType=INTEGER}
+  </select>
+  <!--按主键查询员工信息（带部门信息）-->
+  <select id="selectByPrimaryKeyWithDept" parameterType="java.lang.Integer" resultMap="WithDeptResultMap">
+    select
+    <include refid="WithDept_Column_List" />
+    from tbl_emp e LEFT JOIN tbl_dept d ON e.d_id = d.dept_id
     where emp_id = #{empId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

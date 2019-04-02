@@ -20,6 +20,20 @@ public interface EmployeeMapper {
 
     Employee selectByPrimaryKey(Integer empId);
 
+    /**
+     * 按条件查询员工信息（带部门信息）
+     * @param example
+     * @return
+     */
+    List<Employee> selectByExampleWithDept(EmployeeExample example);
+
+    /**
+     * 按主键查询员工信息（带部门信息）
+     * @param empId
+     * @return
+     */
+    Employee selectByPrimaryKeyWithDept(Integer empId);
+
     int updateByExampleSelective(@Param("record") Employee record, @Param("example") EmployeeExample example);
 
     int updateByExample(@Param("record") Employee record, @Param("example") EmployeeExample example);
