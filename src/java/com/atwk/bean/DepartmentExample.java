@@ -1,8 +1,12 @@
 package com.atwk.bean;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class DepartmentExample {
     protected String orderByClause;
 

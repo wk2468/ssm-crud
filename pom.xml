@@ -79,6 +79,16 @@
     </dependency>
 
 
+    <!-- 分页插件 pagehelper  -->
+    <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper -->
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+      <version>5.0.0</version>
+    </dependency>
+
+
+
     <!--数据库连接池、驱动-->
     <!-- https://mvnrepository.com/artifact/c3p0/c3p0 -->
     <dependency>
