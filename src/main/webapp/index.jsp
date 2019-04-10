@@ -18,6 +18,7 @@
 </head>
 <body>
     <h1>hello world!</h1>
-<button class="btn btn-default">按钮</button>
+    <button class="btn btn-default">按钮</button>
+    <jsp:forward page="/emps"></jsp:forward>
 </body>
 </html>
