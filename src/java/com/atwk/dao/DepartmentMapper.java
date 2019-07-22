@@ -2,8 +2,10 @@ package com.atwk.dao;
 
 import com.atwk.bean.Department;
 import com.atwk.bean.DepartmentExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
 
 public interface DepartmentMapper {
     long countByExample(DepartmentExample example);

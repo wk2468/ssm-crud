@@ -15,7 +15,6 @@
           不以/开始的相对路径，找资源，以当前资源的路径为基准，经常容易出问题。
           以/开始的相对路径，找资源，以服务器的路径为标准（http:localhost:8080）；
      --%>
-    <%= request.getContextPath()%>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"/>
     <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
@@ -77,8 +76,6 @@
                             </td>
                         </tr>
                     </c:forEach>
-
-
 
                 </table>
             </div>

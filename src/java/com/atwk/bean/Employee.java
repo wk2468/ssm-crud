@@ -1,13 +1,21 @@
 package com.atwk.bean;
 
+
+import javax.validation.constraints.Pattern;
+
 public class Employee {
+
     private Integer empId;
 
+    @Pattern(regexp = "(^[a-zA-Z0-9_-]{6,16}$)|(^[\\u2E80-\\u9FFF]{2,5})",
+                message = "用户名必须是2-5为汉字或者6-16为英文和数字的组合")
     private String empName;
 
-    private String gender;
-
+    @Pattern(regexp = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$",
+                message = "邮箱格式不正确")
     private String email;
+
+    private String gender;
 
     private Integer dId;
 
@@ -17,12 +25,21 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(Integer empId, String empName, String gender, String email, Integer dId) {
+    public Employee(Integer empId, String empName, String email, String gender, Integer dId) {
         this.empId = empId;
         this.empName = empName;
-        this.gender = gender;
         this.email = email;
+        this.gender = gender;
         this.dId = dId;
+    }
+
+    public Employee(Integer empId, String empName, String email, String gender, Integer dId, com.atwk.bean.Department department) {
+        this.empId = empId;
+        this.empName = empName;
+        this.email = email;
+        this.gender = gender;
+        this.dId = dId;
+        this.department = department;
     }
 
     public Integer getEmpId() {
@@ -65,11 +82,11 @@ public class Employee {
         this.dId = dId;
     }
 
-    public Department getDepartment() {
+    public com.atwk.bean.Department getDepartment() {
         return department;
     }
 
-    public void setDepartment(Department department) {
+    public void setDepartment(com.atwk.bean.Department department) {
         this.department = department;
     }
 
@@ -78,8 +95,9 @@ public class Employee {
         return "Employee{" +
                 "empId=" + empId +
                 ", empName='" + empName + '\'' +
-                ", gender='" + gender + '\'' +
                 ", email='" + email + '\'' +
+                ", gender='" + gender + '\'' +
+                ", dId=" + dId +
                 ", department=" + department +
                 '}';
     }

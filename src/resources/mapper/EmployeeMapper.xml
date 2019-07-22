@@ -85,6 +85,7 @@
   <sql id="WithDept_Column_List">
     e.emp_id, e.emp_name, e.gender, e.email, e.d_id,d.dept_id, d.dept_name
   </sql>
+
   <select id="selectByExample" parameterType="com.atwk.bean.EmployeeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -99,8 +100,15 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tbl_emp
+    where emp_id = #{empId,jdbcType=INTEGER}
+  </select>
+
   <!--按条件查询员工信息（带部门信息）-->
-  <select id="selectByExampleWithDept" parameterType="com.atwk.bean.EmployeeExample" resultMap="BaseResultMap">
+  <select id="selectByExampleWithDept" parameterType="com.atwk.bean.EmployeeExample" resultMap="WithDeptResultMap">
     select
     <if test="distinct">
       distinct
@@ -114,12 +122,6 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from tbl_emp
-    where emp_id = #{empId,jdbcType=INTEGER}
-  </select>
   <!--按主键查询员工信息（带部门信息）-->
   <select id="selectByPrimaryKeyWithDept" parameterType="java.lang.Integer" resultMap="WithDeptResultMap">
     select
@@ -127,6 +129,7 @@
     from tbl_emp e LEFT JOIN tbl_dept d ON e.d_id = d.dept_id
     where emp_id = #{empId,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tbl_emp
     where emp_id = #{empId,jdbcType=INTEGER}
